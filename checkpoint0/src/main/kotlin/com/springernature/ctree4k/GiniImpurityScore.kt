@@ -1,8 +1,5 @@
 package com.springernature.ctree4k
 
-import com.springernature.ctree4k.Instance
-import com.springernature.ctree4k.InstanceClasses
-
 data class SplitHalf(val instances: List<Instance>)
 
 class GiniImpurityScore: (Pair<SplitHalf, SplitHalf>, InstanceClasses) -> GiniScore {
