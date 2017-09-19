@@ -13,25 +13,31 @@ class GiniImpurityScoreTest {
     val circleClass = InstanceClass(0, "triangle")
     val allClasses = InstanceClasses(setOf(triangleClass, circleClass))
 
-    val triangleOne = createInstance(someFeature, triangleClass)
-    val triangleTwo = createInstance(someFeature, triangleClass)
-    val circleOne = createInstance(someFeature, circleClass)
-    val circleTwo = createInstance(someFeature, circleClass)
+    val triangle = createInstance(someFeature, triangleClass)
+    val circle = createInstance(someFeature, circleClass)
 
     val giniScore = GiniImpurityScore()
 
-    @Test fun `returns 0,5 for the worst split`() {
+    @Test fun `returns 0,5`() {
 
-        val leftSplit = SplitHalf(listOf(triangleOne, circleOne))
-        val rightSplit = SplitHalf(listOf(triangleTwo, circleTwo))
+        val leftSplit = SplitHalf(listOf(triangle, circle))
+        val rightSplit = SplitHalf(listOf(triangle, circle))
 
         assertThat(giniScore(Pair(leftSplit, rightSplit), allClasses), equalTo(GiniScore(0.5)))
     }
 
-    @Test fun `returns 0 for the best split`() {
+    @Test fun `returns 0`() {
 
-        val leftSplit = SplitHalf(listOf(triangleOne, triangleTwo))
-        val rightSplit = SplitHalf(listOf(circleOne, circleTwo))
+        val leftSplit = SplitHalf(listOf(triangle, triangle))
+        val rightSplit = SplitHalf(listOf(circle, circle))
+
+        assertThat(giniScore(Pair(leftSplit, rightSplit), allClasses), equalTo(GiniScore(0.5)))
+    }
+
+    @Test fun `returns 0,4`() {
+
+        val leftSplit = SplitHalf(listOf(triangle, triangle))
+        val rightSplit = SplitHalf(listOf(circle, circle, circle, circle, circle, circle, triangle, triangle, triangle, triangle))
 
         assertThat(giniScore(Pair(leftSplit, rightSplit), allClasses), equalTo(GiniScore(0.5)))
     }
