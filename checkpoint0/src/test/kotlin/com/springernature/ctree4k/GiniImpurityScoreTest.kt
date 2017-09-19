@@ -10,7 +10,7 @@ class GiniImpurityScoreTest {
     val someFeature = listOf(Feature(0.0, FeatureId("feature-1")))
 
     val triangleClass = InstanceClass(0, "triangle")
-    val circleClass = InstanceClass(0, "triangle")
+    val circleClass = InstanceClass(0, "circle")
     val allClasses = InstanceClasses(setOf(triangleClass, circleClass))
 
     val triangle = createInstance(someFeature, triangleClass)
