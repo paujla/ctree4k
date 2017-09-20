@@ -31,15 +31,15 @@ class GiniImpurityScoreTest {
         val leftSplit = SplitHalf(listOf(triangle, triangle))
         val rightSplit = SplitHalf(listOf(circle, circle))
 
-        assertThat(giniScore(Pair(leftSplit, rightSplit), allClasses), equalTo(GiniScore(0.5)))
+        assertThat(giniScore(Pair(leftSplit, rightSplit), allClasses), equalTo(GiniScore(0.0)))
     }
 
     @Test fun `returns 0,4`() {
 
         val leftSplit = SplitHalf(listOf(triangle, triangle))
-        val rightSplit = SplitHalf(listOf(circle, circle, circle, circle, circle, circle, triangle, triangle, triangle, triangle))
+        val rightSplit = SplitHalf(listOf(circle, circle, circle, circle, triangle, triangle, triangle, triangle))
 
-        assertThat(giniScore(Pair(leftSplit, rightSplit), allClasses), equalTo(GiniScore(0.5)))
+        assertThat(giniScore(Pair(leftSplit, rightSplit), allClasses), equalTo(GiniScore(0.4)))
     }
 }
 

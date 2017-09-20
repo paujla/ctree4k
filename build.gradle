@@ -22,6 +22,15 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    main {
+        kotlin.srcDir "checkpoint0/src/main/kotlin"
+    }
+    test {
+        kotlin.srcDir "checkpoint0/src/test/kotlin"
+    }
+}
+
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
     compile group: 'com.google.guava', name: 'guava', version: '22.0'
