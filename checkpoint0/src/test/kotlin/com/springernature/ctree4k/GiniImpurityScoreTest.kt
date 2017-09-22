@@ -6,15 +6,12 @@ import org.junit.Test
 
 class GiniImpurityScoreTest {
 
-    // we don't care at the moment about what the feature is or it's value
-    val someFeature = listOf(Feature(0.0, FeatureId("feature-1")))
-
     val triangleClass = InstanceClass(0, "triangle")
     val circleClass = InstanceClass(0, "circle")
     val allClasses = InstanceClasses(setOf(triangleClass, circleClass))
 
-    val triangle = createInstance(someFeature, triangleClass)
-    val circle = createInstance(someFeature, circleClass)
+    val triangle = createInstance(triangleClass)
+    val circle = createInstance(circleClass)
 
     val giniScore = GiniImpurityScore()
 
@@ -43,11 +40,11 @@ class GiniImpurityScoreTest {
     }
 }
 
-private fun createInstance(features: List<Feature>, instanceClass: InstanceClass): Instance {
+private fun createInstance(instanceClass: InstanceClass): Instance {
     return object : Instance {
 
         override val features: List<Feature>
-            get() = features
+            get() = emptyList()
 
         override val instanceClass: InstanceClass
             get() = instanceClass
