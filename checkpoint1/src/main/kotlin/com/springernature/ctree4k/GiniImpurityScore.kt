@@ -6,20 +6,18 @@ class GiniImpurityScore : (Pair<SplitHalf, SplitHalf>, InstanceClasses) -> GiniS
 
     override fun invoke(bothSplits: Pair<SplitHalf, SplitHalf>, allClasses: InstanceClasses): GiniScore {
 
-        val eachScore = bothSplits.toList().map { half: List<Instance> ->
+        val eachScoreBySplit = bothSplits.toList().map { half: List<Instance> ->
             val currentSplitSize = half.size
 
-            val eachClassScoreBySplit = allClasses.value.map { featureSetClass: InstanceClass ->
+            val eachScoreByClassAndSplit = allClasses.value.map { featureSetClass: InstanceClass ->
                 val ratio = half.ratioThatAre(featureSetClass)
                 ratio * ratio
             }
 
-            val score = eachClassScoreBySplit.sum()
-
-            val scoreBySplit = (1.0 - score) * (currentSplitSize.toDouble().div(bothSplits.totalInstancesCount()))
+            val scoreBySplit = (1.0 - eachScoreByClassAndSplit.sum()) * (currentSplitSize.toDouble().div(bothSplits.totalInstancesCount()))
             scoreBySplit
         }
-        val score = eachScore.sum()
+        val score = eachScoreBySplit.sum()
 
         return GiniScore(score)
     }
