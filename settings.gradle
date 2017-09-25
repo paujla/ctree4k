@@ -1,3 +1,4 @@
 rootProject.name = 'ctree4k'
 include 'checkpoint0'
+include 'checkpoint1'
 
