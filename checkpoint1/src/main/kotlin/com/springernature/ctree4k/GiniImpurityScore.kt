@@ -16,7 +16,7 @@ class GiniImpurityScore : (Pair<SplitHalf, SplitHalf>, InstanceClasses) -> GiniS
 
             val score = eachClassScoreBySplit.sum()
 
-            val scoreBySplit = (1.0 - score) * (currentSplitSize.toDouble().div(bothSplits.count()))
+            val scoreBySplit = (1.0 - score) * (currentSplitSize.toDouble().div(bothSplits.totalInstancesCount()))
             scoreBySplit
         }
         val score = eachScore.sum()
@@ -32,11 +32,11 @@ private fun List<Instance>.ratioThatAre(instanceClass: InstanceClass): Double {
         it.instanceClass == instanceClass
     }
 
-    return count.toDouble().div(size.toDouble())
+    return count.toDouble().div(size)
 }
 
 private fun Pair<SplitHalf, SplitHalf>.toList(): List<List<Instance>> {
     return listOf(first.instances, second.instances)
 }
 
-private fun Pair<SplitHalf, SplitHalf>.count(): Int = first.instances.count().plus(second.instances.count())
+private fun Pair<SplitHalf, SplitHalf>.totalInstancesCount(): Int = first.instances.count().plus(second.instances.count())
